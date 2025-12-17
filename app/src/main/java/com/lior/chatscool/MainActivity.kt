@@ -7,6 +7,7 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 
 class MainActivity : AppCompatActivity() {
@@ -15,9 +16,13 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        // 🔥 חובה: מפעיל את SplashScreen של Android 12+
+        installSplashScreen()
+
         super.onCreate(savedInstanceState)
 
-        // חשוב: מאפשר ל-adjustResize לעבוד טוב עם WebView על API חדשים
+        // חשוב: מאפשר ל-adjustResize לעבוד טוב עם WebView
         WindowCompat.setDecorFitsSystemWindows(window, true)
 
         setContentView(R.layout.activity_main)
@@ -36,11 +41,9 @@ class MainActivity : AppCompatActivity() {
         s.builtInZoomControls = false
         s.displayZoomControls = false
         s.mediaPlaybackRequiresUserGesture = false
-
-        // מומלץ כדי ש-inputs יעבדו חלק יותר בתוך WebView
         s.javaScriptCanOpenWindowsAutomatically = true
 
-        // כתובת האתר (שים לב: www)
+        // טוען את האתר
         webView.loadUrl("https://www.chats.cool")
     }
 
